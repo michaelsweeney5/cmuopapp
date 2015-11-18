@@ -1,0 +1,1 @@
+//auth.js located in app root/config
