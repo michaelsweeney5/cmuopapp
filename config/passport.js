@@ -1,6 +1,6 @@
 //passport.js located in app root/config/
 // config/passport.js
-var sha1 = require('sha1');
+var sha256 = require('sha256');
 //Load passport local strategy
 var LocalStrategy = require('passport-local').Strategy;
 // load up the user model
@@ -44,7 +44,7 @@ module.exports = function(passport) {
 		  }
 		  //Found a valid user
 		  var salt = user.salt;
-		  hash = sha1(password) + salt;
+		  hash = sha256(password) + salt;
 		  if (user.password != hash) {
 			return done(null, false);
 		  }

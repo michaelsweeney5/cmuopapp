@@ -6,14 +6,14 @@ var db = Mongoose.createConnection('localhost', 'mytestapp');
 Mongoose.connect('mongodb://localhost/cmuopdatabase');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var sha1 = require('sha1');
+var sha256 = require('sha256');
 var fs = require('fs');
 var buffer = new Buffer(32);
 
 //============Process program arguments/Generate Salt/Add to DB============
 
 var username = process.argv[2];
-var password = sha1(process.argv[3]);
+var password = sha256(process.argv[3]);
 var hash;
 var salt = "";
 

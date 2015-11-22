@@ -1,4 +1,3 @@
-
 //============Module Dependencies============
 
 // get all the tools we need
@@ -9,7 +8,7 @@ var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var routes = require('./routes.js');
+var routes = require('./routes/routes.js');
 mongoose.connect('mongodb://localhost/cmuopdatabase');
 require('./config/passport')(passport); // pass passport for configuration
 
@@ -35,7 +34,7 @@ app.use(app.router);
 
 //============Routes============
 // load our routes script and pass in our app and fully configured passport
-require('./routes.js')(app, passport);
+require('./routes/routes.js')(app, passport);
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
