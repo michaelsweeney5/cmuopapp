@@ -1,5 +1,5 @@
-//Routes required in the app root folder
-// app/routes.js
+//Routes located in the routes folder
+// app/routes/routes.js
 var inventoryAPI = require("../api/inventoryAPI");
 
 module.exports = function(app, passport) {
@@ -115,16 +115,24 @@ module.exports = function(app, passport) {
     });
     
     // =====================================
-    // Inventory API =======================
+    // Routes to Inventory API =============
     // =====================================
-    app.get('/api/inventoryAPI', function(req, res) {
-        if(req.isAuthenticated()) {
-			inventoryAPI.boat.find(function(err, boat) {
-            if (err)
-                res.send(err);
-
-            res.json(boat);
-        });
+	app.get('/api/inventoryAPI/find', function(req, res){
+		if(req.isAuthenticated()) {
+			var collectionName = req.query.collection;
+			var regex = new RegExp(req.query.search, 'i');
+			var searchBy = req.query.searchby;
+			var args = {};
+			var collection=inventoryAPI[collectionName];
+			args[searchBy]={$regex: regex};
+			collection.find(args,function(err, boat) {
+				if(err) {
+					res.send(err);
+				}
+				else {	
+					res.json(boat);
+				}
+			});
 		}
 		else
 			res.render('index');

@@ -1,5 +1,4 @@
-    <script src="node_modules/angular/inventory/customersModule.js"></script>
-	<script src="node_modules/angular/inventory/customersController.js"></script>
+	<script src="../node_modules/angular/customers/customersController.js"></script>
 	</head>
 
   <body role="document">
@@ -33,25 +32,7 @@
 
     <div class="container theme-showcase" role="main">
 
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Hello, CMU OP</h1>
-      </div>
-      
-	<div ng-app="customersModule" ng-controller="customersCtrl">
+	<div ng-app="customersApp" ng-controller="customersCtrl">
 		<p>Name : <input type="text" ng-change="myCallback({$event: value})" ng-model="message"></p>
 		<h1>Hello {{message}}</h1>
-	
-		<ul>
-		  <li ng-repeat="x in names">
-			{{ x.name + ', ' + x.country }}
-		  </li>
-		</ul>
 	</div>
-      <div class="page-header">
-        <h1>Test Buttons</h1>
-      </div>
-      <p>
-        <button type="button" class="btn btn-lg btn-default">Not Authenticated</button>
-        <button type="button" class="btn btn-lg btn-primary">Authenticated</button>
-      </p>

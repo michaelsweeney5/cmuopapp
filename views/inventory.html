@@ -1,5 +1,4 @@
-	<script src="node_modules/angular/inventory/inventoryModule.js"></script>
-	<script src="node_modules/angular/inventory/inventoryController.js"></script>
+	<script src="../node_modules/angular/inventory/inventoryController.js"></script>
 	</head>
 
   <body role="document">
@@ -10,7 +9,7 @@
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
+			<span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
@@ -33,28 +32,56 @@
 
 	<div class="container theme-showcase" role="main">
 
-	  <!-- Main jumbotron for a primary marketing message or call to action -->
-	  <div class="jumbotron">
-		<h1>Hello, CMU OP</h1>
-	  </div>
+	<div ng-app="inventoryApp" ng-controller="inventoryCtrl">
+		<h4>Select inventory group to search:</h4>
+        <div class="radio.inline">
+            <label>
+                <input type="radio" name="collection" value="boat" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+                Boats
+            </label>
+            <label>
+                <input type="radio" name="collection" value="bike" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+                Bikes
+            </label>
+            <label>
+                <input type="radio" name="collection" value="tent" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+                Tents
+            </label>
+            <label>
+                <input type="radio" name="collection" value="climbing" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+                Climbing
+            </label>
+        </div>
+        <br>
+        
+        <h4>Search group by: </h4>
+		<div class="radio.inline">
+			<label>
+				<input type="radio" name="searchBy" value="name" ng-model="radioBy.value" ng-change="radioByChange()">
+				Name
+			</label>
+			<label>
+				<input type="radio" name="searchBy" value="type" ng-model="radioBy.value" ng-change="radioByChange()">
+				Type
+			</label>
+			<label>
+				<input type="radio" name="searchBy" value="cost" ng-model="radioBy.value" ng-change="radioByChange()">
+				Cost
+			</label>
+        </div>
 
-	 <div ng-app="inventoryModule" ng-controller="inventoryCtrl">
-		<p>Name : <input type="text" ng-change="myCallback({$event: value})" ng-model="message"></p>
-		<h1>Hello {{message}}</h1>
-	
-		<ul>
-		  <li ng-repeat="x in names">
-			{{ x.name + ', ' + x.country }}
-		  </li>
-		</ul>
+        <br>
+		Find: <input type="text" 
+				ng-change="change()" 
+				ng-model="searchField" 
+				placeholder="Type to search."><br>
+		<br>
+		
+		<table class="table" title="Search Results">
+		<tr ng-repeat="n in details">
+			<td>{{n.name}}</td><td>{{n.type}}</td><td>{{n.cost}}</td>
+		</tr>
+		</table>
+
 	</div>
-	
-	
-	
-	  <div class="page-header">
-		<h1>Test Buttons</h1>
-	  </div>
-	  <p>
-		<button type="button" class="btn btn-lg btn-default">Not Authenticated</button>
-		<button type="button" class="btn btn-lg btn-primary">Authenticated</button>
-	  </p>
+	</div>
