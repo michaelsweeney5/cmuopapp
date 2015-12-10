@@ -78,9 +78,12 @@
 		<br>
 		
 		<table class="table" title="Search Results">
-		<tr ng-repeat="n in details">
-			<td>{{n.name}}</td><td>{{n.type}}</td><td>{{n.cost}}</td>
-		</tr>
+			<tr ng-repeat-start="n in details" ng-if="$first">
+				<th ng-repeat="(key, value) in n" ng-if="!$first">{{key}}</th>
+			</tr>
+			<tr ng-repeat-end="n in details">
+				<td>{{n.name}}</td><td>{{n.type}}</td><td>{{n.cost}}</td>
+			</tr>
 		</table>
 
 	</div>

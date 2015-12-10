@@ -31,8 +31,34 @@
     </nav>
 
     <div class="container theme-showcase" role="main">
-
 	<div ng-app="customersApp" ng-controller="customersCtrl">
-		<p>Name : <input type="text" ng-change="myCallback({$event: value})" ng-model="message"></p>
-		<h1>Hello {{message}}</h1>
+	<h4>Search for customer by: </h4>
+	<div class="radio.inline">
+		<label>
+			<input type="radio" name="searchBy" value="number" ng-model="radioBy.value" ng-change="radioByChange()">
+			700 Number
+		</label>
+		<label>
+			<input type="radio" name="searchBy" value="name" ng-model="radioBy.value" ng-change="radioByChange()">
+			Name
+		</label>
+	</div>
+    <div class="aside">
+		<p>Test</p>
+    </div>
+	<br>
+	Find Customer: <input type="text" 
+						ng-change="change()" 
+						ng-model="searchField"
+						placeholder="Type to search"><br>
+	
+	<table class="table" title="Search Results">
+		<tr ng-repeat-start="n in details" ng-if="$first">
+			<th ng-repeat="(key, value) in n" ng-if="!$first">{{key}}</th>
+		</tr>
+		<tr ng-repeat-end="n in details">
+			<td><img src="../assets/images/customers/{{n.number}}.png" class="img-thumbnail" alt="customer photo"></td><td>{{n.number}}</td><td>{{n.name}}</td><td>{{n.isStudent}}</td><td>{{n.isAlumn}}</td><td>{{n.isStaff}}</td><td>{{n.balance}}</td>
+		</tr>
+	</table>
+		
 	</div>

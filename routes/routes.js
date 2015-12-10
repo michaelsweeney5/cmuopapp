@@ -1,6 +1,7 @@
 //Routes located in the routes folder
 // app/routes/routes.js
 var inventoryAPI = require("../api/inventoryAPI");
+var customersAPI = require("../api/customersAPI");
 
 module.exports = function(app, passport) {
 
@@ -117,7 +118,7 @@ module.exports = function(app, passport) {
     // =====================================
     // Routes to Inventory API =============
     // =====================================
-	app.get('/api/inventoryAPI/find', function(req, res){
+	app.get('/api/inventoryapi/find', function(req, res){
 		if(req.isAuthenticated()) {
 			var collectionName = req.query.collection;
 			var regex = new RegExp(req.query.search, 'i');
@@ -131,6 +132,30 @@ module.exports = function(app, passport) {
 				}
 				else {	
 					res.json(boat);
+				}
+			});
+		}
+		else
+			res.render('index');
+	});
+	
+	// =====================================
+    // Routes to Customers API =============
+    // =====================================
+	app.get('/api/customersapi/find', function(req, res){
+		if(req.isAuthenticated()) {
+			var collectionName = req.query.collection;
+			var regex = new RegExp(req.query.search, 'i');
+			var searchBy = req.query.searchby;
+			var args = {};
+			var collection=customersAPI[collectionName];
+			args[searchBy]={$regex: regex};
+			collection.find(args,function(err, customer) {
+				if(err) {
+					res.send(err);
+				}
+				else {	
+					res.json(customer);
 				}
 			});
 		}
