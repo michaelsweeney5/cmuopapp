@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var boatSchema = mongoose.Schema({
         name			: String,
         type			: String,
-        price			: String,
+        cost			: String,
         timesRented		: Number,
         beingRepaired	: Boolean
 });

@@ -33,50 +33,84 @@
 	<div class="container theme-showcase" role="main">
 
 	<div ng-app="inventoryApp" ng-controller="inventoryCtrl">
-		<h4>Select inventory group to search:</h4>
-        <div class="radio.inline">
-            <label>
-                <input type="radio" name="collection" value="boat" ng-model="radioGroup.value" ng-change="radioGroupChange()">
-                Boats
-            </label>
-            <label>
-                <input type="radio" name="collection" value="bike" ng-model="radioGroup.value" ng-change="radioGroupChange()">
-                Bikes
-            </label>
-            <label>
-                <input type="radio" name="collection" value="tent" ng-model="radioGroup.value" ng-change="radioGroupChange()">
-                Tents
-            </label>
-            <label>
-                <input type="radio" name="collection" value="climbing" ng-model="radioGroup.value" ng-change="radioGroupChange()">
-                Climbing
-            </label>
-        </div>
-        <br>
-        
-        <h4>Search group by: </h4>
-		<div class="radio.inline">
-			<label>
-				<input type="radio" name="searchBy" value="name" ng-model="radioBy.value" ng-change="radioByChange()">
-				Name
-			</label>
-			<label>
-				<input type="radio" name="searchBy" value="type" ng-model="radioBy.value" ng-change="radioByChange()">
-				Type
-			</label>
-			<label>
-				<input type="radio" name="searchBy" value="cost" ng-model="radioBy.value" ng-change="radioByChange()">
-				Cost
-			</label>
-        </div>
+	<div class="topRowParent"> 
+		<div class="leftChild">
+			<h5>Select inventory group to search:</h5>
+			<div class="radio.inline">
+				<label>
+					<input type="radio" name="collection" value="boat" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+					Boats
+				</label>
+				<label>
+					<input type="radio" name="collection" value="bike" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+					Bikes
+				</label>
+				<label>
+					<input type="radio" name="collection" value="tent" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+					Tents
+				</label>
+				<label>
+					<input type="radio" name="collection" value="climbing" ng-model="radioGroup.value" ng-change="radioGroupChange()">
+					Climbing
+				</label>
+			</div>
+			<br>
+			
+			<h5>Search group by: </h5>
+			<div class="radio.inline">
+				<label>
+					<input type="radio" name="searchBy" value="name" ng-model="radioBy.value" ng-change="radioByChange()">
+					Name
+				</label>
+				<label>
+					<input type="radio" name="searchBy" value="type" ng-model="radioBy.value" ng-change="radioByChange()">
+					Type
+				</label>
+				<label>
+					<input type="radio" name="searchBy" value="cost" ng-model="radioBy.value" ng-change="radioByChange()">
+					Cost
+				</label>
+			</div>
 
-        <br>
-		Find: <input type="text" 
-				ng-change="change()" 
-				ng-model="searchField" 
-				placeholder="Type to search."><br>
+			Find: <input type="text" class="formInput" 
+					ng-change="change()" 
+					ng-model="searchField" 
+					placeholder="Type to search."><br>
+		</div>
+		<div class="rightChild">
+			<form>
+				<h5>Fill out form and click "add."</h5>
+				Select a category:<div class="radio.inline">
+							<label>
+								<input type="radio" name="addToCollection" value="boat" ng-model="radioAdd.value" ng-change="radioAddChange()">
+							Boats<label>
+							<label>
+								<input type="radio" name="addToCollection" value="bike" ng-model="radioAdd.value" ng-change="radioAddChange()">
+							Bikes<label>
+							<label>
+								<input type="radio" name="addToCollection" value="tent" ng-model="radioAdd.value" ng-change="radioAddChange()">
+							Tents<label>
+							<label>
+								<input type="radio" name="addToCollection" value="climbing" ng-model="radioAdd.value" ng-change="radioAddChange()">
+							Climbing<label>
+						 </div>
+				Name:<input type="text" class="formInput"
+						ng-model="addName"
+						placeholder="Enter item name."><br>
+				Type:<input type="text" class="formInput"
+						ng-model="addType" 
+						placeholder="Enter item type."><br>
+				Cost:<input type="text" class="formInput"
+						ng-model="addCost"
+						placeholder="Enter item cost."><br>
+				Add to inventory: <input type="button"
+								ng-click="add()"
+								ng-model="addButton"
+								value="Add to inventory"><br>
+								{{warning}}
+			</form>
+		</div>
 		<br>
-		
 		<table class="table" title="Search Results">
 			<tr ng-repeat-start="n in details" ng-if="$first">
 				<th ng-repeat="(key, value) in n" ng-if="!$first">{{key}}</th>

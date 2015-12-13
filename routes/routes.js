@@ -118,7 +118,7 @@ module.exports = function(app, passport) {
     // =====================================
     // Routes to Inventory API =============
     // =====================================
-	app.get('/api/inventoryapi/find', function(req, res){
+	app.get('/api/inventoryapi', function(req, res){
 		if(req.isAuthenticated()) {
 			var collectionName = req.query.collection;
 			var regex = new RegExp(req.query.search, 'i');
@@ -142,7 +142,7 @@ module.exports = function(app, passport) {
 	// =====================================
     // Routes to Customers API =============
     // =====================================
-	app.get('/api/customersapi/find', function(req, res){
+	app.get('/api/customersapi', function(req, res){
 		if(req.isAuthenticated()) {
 			var collectionName = req.query.collection;
 			var regex = new RegExp(req.query.search, 'i');
@@ -156,6 +156,27 @@ module.exports = function(app, passport) {
 				}
 				else {	
 					res.json(customer);
+				}
+			});
+		}
+		else
+			res.render('index');
+	});
+	
+	app.post('/api/inventoryapi', function(req, res){
+		if(req.isAuthenticated()) {
+			var addObject = new inventoryAPI.boat({
+			  name: req.query.name
+			, type: req.query.type
+			, price: req.query.cost
+			});
+			
+			addObject.save(function(err, result) {
+				if(err) {
+					res.send(err);
+				}
+				else {	
+					res.json("Added successfully.");
 				}
 			});
 		}
