@@ -163,12 +163,12 @@ module.exports = function(app, passport) {
 			res.render('index');
 	});
 	
-	app.post('/api/inventoryapi', function(req, res){
+	app.post('/api/inventoryapi/insert', function(req, res){
 		if(req.isAuthenticated()) {
 			var addObject = new inventoryAPI.boat({
 			  name: req.query.name
 			, type: req.query.type
-			, price: req.query.cost
+			, cost: req.query.cost
 			});
 			
 			addObject.save(function(err, result) {
@@ -177,6 +177,26 @@ module.exports = function(app, passport) {
 				}
 				else {	
 					res.json("Added successfully.");
+				}
+			});
+		}
+		else
+			res.render('index');
+	});
+	
+	app.post('/api/inventoryapi/delete', function(req, res){
+		if(req.isAuthenticated()) {
+			var name = "name";
+			var args = {};
+			args[name] = {name: req.query.name}
+			var delObject = new inventoryAPI.boat({
+			});
+			delObject.remove(args,function(err, result) {
+				if(err) {
+					res.send(err);
+				}
+				else {
+					res.json(result);
 				}
 			});
 		}

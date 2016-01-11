@@ -110,6 +110,9 @@
 								{{warning}}
 			</form>
 		</div>
+		Delete an item:<input type="button" value="Delete" class=""
+							ng-model="delete"
+							ng-click="remove()"><br>
 		<br>
 		<table class="table" title="Search Results">
 			<tr ng-repeat-start="n in details" ng-if="$first">
